@@ -1,5 +1,7 @@
 # 🛡️ Azure Honeypot Lab with Microsoft Sentinel
 
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/8fcf8800a4a977166ff68d2114e108eda6ad9a3f/%F0%9F%8E%AFAzure_Honey-pot_Lab_with_Microsoft_Sentinel.png)
+
 Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitoring brute-force RDP attacks, harvesting logs with geolocation data, and visualize attacker sources on a map — all through Microsoft Sentinel. Appended Incident reponse alerts to trigger when a attack was occuring using the logic app to connect to the logic analystics workspace.
 
 > 🔗 Inspired by the Cyber Range and Josh Madakor’s labs.
