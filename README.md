@@ -46,6 +46,8 @@ Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitorin
 
 ![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/53485e2c61ee039c98f3d5e9e889125c4d793567/Inside%20vm%20and%20disabling%20firewall.png)
 
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/remote%20desktop%20protocol.png)
+
 ---
 
 ## 3. Login Events and Security Logs
@@ -68,6 +70,16 @@ Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitorin
 - 📌 Set up a **Data Collection Rule (DCR)** to forward logs
 - 🔍 Confirm logs from your honeypot are arriving in Sentinel
 
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/azure%20moniitorinf%20windows%20agent.png)
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/install%20microsoft%20sential%20and%20download%20windows%20security%20events.png)
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/azure%20moniitorinf%20windows%20agent.png)
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/install%20microsoft%20sential%20and%20download%20windows%20security%20events.png)
+
+
+
 ### Sample KQL Query:
 ```
 SecurityEvent
@@ -75,10 +87,13 @@ SecurityEvent
 
 💡 Sentinel uses Kusto Query Language (KQL), similar to SQL. 
 ```
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/logs%20being%20forwared%20to%20law%20workspace%20from%20monitoring%20agent.png)
 
-## 5. Log Enrichment (GeoIP)
+## 5. Log Intergration (GeoIP)
 
 By default, login logs show IP addresses but no location. We need to add them using a GeoIP watchlist.
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/using%20geo%20location%20to%20map%20attackers.png)
 
 ### 🔽 Step-by-step:
 
@@ -104,6 +119,10 @@ WindowsEvents
 🌍 This query will integrate logs with geolocation info(from the geo-ip file) by matching attacker IP addresses against the watchlist to view where the attack came from.
 ```
 
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/using%20geo%20location%20to%20narrow%20down%20person%20with%20ip%20address.png)
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/ip%20lookup%20of%20log.png)
+
 ## 6. Create a Real-Time Attack Map
 
 These are the steps to create a geographic visualization of brute-force login attempts using Microsoft Sentinel:
@@ -119,6 +138,8 @@ These are the steps to create a geographic visualization of brute-force login at
 6. Click **Save** and **Run** the workbook
 
 ✅ You’ll now see **real-time attack data** mapped by geographic location — giving you a clear, visual view of where brute-force login attempts are coming from around the world.
+
+
 
 ---
 
