@@ -7,6 +7,10 @@ Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitorin
 
 ---
 
+## Security Operations Centre Architecture
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/cfe9f59e90055e8d56913578912ba5ee1fb8cfdb/SOC.png)
+
 ## 📌 Contents
 
 1. [Azure Subscription Setup](#1-azure-subscription-setup)  
