@@ -41,6 +41,8 @@ Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitorin
    - Add an **inbound rule**: Allow all traffic (use `*` ports).
 5. RDP into the VM and turn off the firewall:
    - Run: `wf.msc` → Properties → Turn off Domain, Private, and Public firewalls.
+  
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/40c545842c06daa2cecc17107b2e13eb6cf8d7ca/virtual%20machine%2C%20firewall%2C%20and%20ip.png)
 
 ---
 
