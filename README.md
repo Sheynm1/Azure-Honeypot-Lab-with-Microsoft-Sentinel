@@ -74,11 +74,6 @@ Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitorin
 
 ![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/install%20microsoft%20sential%20and%20download%20windows%20security%20events.png)
 
-![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/azure%20moniitorinf%20windows%20agent.png)
-
-![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/4abbbc8848fbd0d94aad80109ad9dcc9b252ce0b/install%20microsoft%20sential%20and%20download%20windows%20security%20events.png)
-
-
 
 ### Sample KQL Query:
 ```
@@ -137,11 +132,26 @@ These are the steps to create a geographic visualization of brute-force login at
    > 🗂️ Get the `map.json` file from [Josh’s GitHub Sentinel Lab](https://github.com/joshmadakor1/Sentinel-Lab)
 6. Click **Save** and **Run** the workbook
 
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/49732e87b3afaadf7523b05e1e38685a4e9d3a6a/attack%20map%20creation.png)
+
 ✅ You’ll now see **real-time attack data** mapped by geographic location — giving you a clear, visual view of where brute-force login attempts are coming from around the world.
 
-
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/49732e87b3afaadf7523b05e1e38685a4e9d3a6a/updated%20attack%20map%20with%20more%20attacks.png)
 
 ---
+
+## 7. Creating Automated Incident responses for the SOC using the Logic App
+
+1. Go to **Logic app → Add resource group to SOC → Apply region**
+2. **Add a trigger on the logic app** to add sentinal incident creation rule
+3. Click **"Any sentinal rule"** then choose and operation
+4. **Save rule triggers** then activate the rule
+5. **Edit the automation rule** then add any conditions and apply the playbook(the logic app trigger we created) and activate the rule
+6. **Now when viewing the incidents in sentinal** We can see every attack that comes through is logged through severity and when it occurs
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/49732e87b3afaadf7523b05e1e38685a4e9d3a6a/%23using%20logic%20app%20to%20create%20automated%20incident%20repsonses.png)
+
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/49732e87b3afaadf7523b05e1e38685a4e9d3a6a/automated%20responses.png)
 
 ## 📚 Resources
 
