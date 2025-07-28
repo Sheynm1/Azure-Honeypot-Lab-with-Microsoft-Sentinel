@@ -1,1 +1,124 @@
-# Azure-Honeypot-Lab-with-Microsoft-Sentinel
+# 🛡️ Azure Honeypot Lab with Microsoft Sentinel
+
+Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitoring brute-force RDP attacks, harvesting logs with geolocation data, and visualize attacker sources on a map — all through Microsoft Sentinel. Appended Incident reponse alerts to trigger when a attack was occuring using the logic app to connect to the logic analystics workspace.
+
+> 🔗 Inspired by the Cyber Range and Josh Madakor’s labs.
+
+---
+
+## 📌 Contents
+
+1. [Azure Subscription Setup](#1-azure-subscription-setup)  
+2. [Create the Honeypot VM](#2-create-the-honeypot-vm)  
+3. [Login Events and Security Logs](#3-login-events-and-security-logs)  
+4. [Log Analytics and KQL](#4-log-analytics-and-kql)  
+5. [Log Enrichment (GeoIP)](#5-log-enrichment-geoip)  
+6. [Create a Real-Time Attack Map](#6-create-a-real-time-attack-map)
+
+---
+
+## 1. Azure Subscription Setup
+
+- 👉 Create a **free Azure subscription**:  
+  [https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account)
+
+- 🔁 If a free account is unavailable:
+  - Use a paid account (be mindful of costs).
+ 
+
+- 🖥️ Azure Portal login:  
+  [https://portal.azure.com](https://portal.azure.com)
+
+---
+
+## 2. Create the Honeypot VM
+
+1. In Azure Portal, search: **Virtual Machines** → Create a **Windows 10** VM.
+2. Choose a suitable size (smaller is cheaper).
+3. **Remember** your username & password.
+4. Go to the **Network Security Group (NSG)**:
+   - Add an **inbound rule**: Allow all traffic (use `*` ports).
+5. RDP into the VM and turn off the firewall:
+   - Run: `wf.msc` → Properties → Turn off Domain, Private, and Public firewalls.
+
+---
+
+## 3. Login Events and Security Logs
+
+1. On the honeypot VM, **simulate failed logins**:
+   - Attempt to log in 3 times with a fake user (e.g. `employee`).
+2. Open **Event Viewer** → Security Logs.
+3. Look for:
+   - **Event ID 4625** (failed login attempts)
+
+---
+
+## 4. Log Analytics and KQL
+
+### Step-by-step:
+
+- 🔧 Create a **Log Analytics Workspace (LAW)**
+- ➕ Add **Microsoft Sentinel** to the workspace
+- 🛠️ Use the **Windows Security Events via AMA** connector
+- 📌 Set up a **Data Collection Rule (DCR)** to forward logs
+- 🔍 Confirm logs from your honeypot are arriving in Sentinel
+
+### Sample KQL Query:
+```
+SecurityEvent
+| where EventID == 4625
+
+💡 Sentinel uses Kusto Query Language (KQL), similar to SQL. 
+```
+
+## 5. Log Enrichment (GeoIP)
+
+By default, login logs show IP addresses but no location. We need to add them using a GeoIP watchlist.
+
+### 🔽 Step-by-step:
+
+1. **Download the GeoIP CSV**:
+https://drive.google.com/file/d/13EfjM_4BohrmaxqXZLB5VUBIz2sv9Siz/view
+
+2. **In Microsoft Sentinel → Watchlists**:
+- **Name / Alias**: `geoip`
+- **Source Type**: Local file
+- **Search Key Column**: `network`
+- **Header Rows to Skip**: `0`
+- Upload the CSV file (about **54,000 rows**)
+
+3. **KQL to enrich logs with GeoIP**:
+```kql
+let GeoIPDB_FULL = _GetWatchlist("geoip");
+let WindowsEvents = SecurityEvent
+    | where EventID == 4625
+    | order by TimeGenerated desc
+    | evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
+WindowsEvents
+
+🌍 This query will integrate logs with geolocation info(from the geo-ip file) by matching attacker IP addresses against the watchlist to view where the attack came from.
+```
+
+## 6. Create a Real-Time Attack Map
+
+These are the steps to create a geographic visualization of brute-force login attempts using Microsoft Sentinel:
+
+### 🛠️ Steps:
+
+1. Go to **Microsoft Sentinel → Workbooks → New Workbook**
+2. **Delete** any default or preloaded elements
+3. Click **"Add Query"** to insert a new query tile
+4. Open the **Advanced Editor** tab
+5. **Paste in the `map.json` configuration**  
+   > 🗂️ Get the `map.json` file from [Josh’s GitHub Sentinel Lab](https://github.com/joshmadakor1/Sentinel-Lab)
+6. Click **Save** and **Run** the workbook
+
+✅ You’ll now see **real-time attack data** mapped by geographic location — giving you a clear, visual view of where brute-force login attempts are coming from around the world.
+
+---
+
+## 📚 Resources
+
+- 💻 [Azure Free Account](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account)
+- 📦 [GeoIP Watchlist CSV](https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/misc/geoip-summarized.csv)
+- 🛠️ [Josh’s GitHub Sentinel Lab](https://github.com/joshmadakor1/Sentinel-Lab)
