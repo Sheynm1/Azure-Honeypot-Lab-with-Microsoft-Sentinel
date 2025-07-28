@@ -1,4 +1,3 @@
-# 🛡️ Azure Honeypot Lab with Microsoft Sentinel
 
 ![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/8fcf8800a4a977166ff68d2114e108eda6ad9a3f/%F0%9F%8E%AFAzure_Honey-pot_Lab_with_Microsoft_Sentinel.png)
 
