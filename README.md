@@ -44,6 +44,8 @@ Setting up a realistic honeypot using a Windows VM on Microsoft Azure, monitorin
   
 ![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/40c545842c06daa2cecc17107b2e13eb6cf8d7ca/virtual%20machine%2C%20firewall%2C%20and%20ip.png)
 
+![](https://github.com/Sheynm1/Azure-Honeypot-Lab-with-Microsoft-Sentinel/blob/53485e2c61ee039c98f3d5e9e889125c4d793567/Inside%20vm%20and%20disabling%20firewall.png)
+
 ---
 
 ## 3. Login Events and Security Logs
